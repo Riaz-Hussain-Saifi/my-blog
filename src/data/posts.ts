@@ -1,3 +1,4 @@
+// src/data/posts.ts
 export const blogPosts = [
     {
       id: '1',
@@ -49,5 +50,12 @@ export const blogPosts = [
         avatar: '/Front-End.jpg'
       }
     },
-    // Add more posts as needed
+    // We can add more posts as needed
   ]
+
+
+
+
+
+
+  

@@ -1,3 +1,6 @@
+// src/components/HeroSection.tsx
+import Image from 'next/image';
+
 interface HeroSectionProps {
     title: string
     subtitle: string
@@ -9,10 +12,12 @@ interface HeroSectionProps {
       <div className="relative bg-gray-900 text-white">
         {imageUrl && (
           <div className="absolute inset-0">
-            <img
+            <Image
               src={imageUrl}
               alt="Hero background"
-              className="w-full h-full object-cover opacity-40"
+              layout="fill"
+              objectFit="cover"
+              className="opacity-40"
             />
             <div className="absolute inset-0 bg-gray-900 opacity-75" />
           </div>

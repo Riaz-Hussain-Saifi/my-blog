@@ -1,3 +1,4 @@
+// src/app/content/page.tsx
 import HeroSection from '@/components/HeroSection'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -80,7 +81,7 @@ export default function Content() {
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-8">Want to Contribute?</h2>
           <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-            Share your knowledge and expertise with our community. We're always
+            Share your knowledge and expertise with our community. We&apos;re always
             looking for new contributors to help us create valuable content.
           </p>
           <Link
@@ -94,3 +95,8 @@ export default function Content() {
     </div>
   )
 }
+
+
+
+
+

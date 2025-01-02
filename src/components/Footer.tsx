@@ -1,3 +1,4 @@
+// src/components/Footer.tsx
 import Link from 'next/link'
 import { Linkedin, Github } from 'lucide-react'
 
@@ -41,10 +42,10 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Connect</h3>
             <div className="flex space-x-4">
-              <Link href="https://www.linkedin.com/in/riaz-hussain-saifi" className="text-gray-400 hover:text-white">
+              <Link href="#" className="text-gray-400 hover:text-white">
                 <Linkedin />
               </Link>
-              <Link href="https://github.com/Riaz-Hussain-Saifi" className="text-gray-400 hover:text-white">
+              <Link href="#" className="text-gray-400 hover:text-white">
                 <Github />
               </Link>
             </div>

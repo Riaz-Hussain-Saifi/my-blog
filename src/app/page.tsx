@@ -1,3 +1,4 @@
+// src/app/page.tsx
 import HeroSection from '@/components/HeroSection'
 import Link from 'next/link'
 import Image from 'next/image'
