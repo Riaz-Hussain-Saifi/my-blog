@@ -1,4 +1,3 @@
-// src/app/about/page.tsx
 "use client"
 import { useState, useEffect } from 'react'
 import HeroSection from '@/components/HeroSection'
@@ -47,106 +46,71 @@ const teamMembers = [
 
 export default function About() {
   const [isVisible, setIsVisible] = useState(false)
-  const [activeTeamMember, setActiveTeamMember] = useState<number | null>(null)
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + window.innerHeight
-      const triggerPosition = window.innerHeight * 0.8
-      setIsVisible(scrollPosition > triggerPosition)
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    handleScroll()
-    return () => window.removeEventListener('scroll', handleScroll)
+    const timeout = setTimeout(() => setIsVisible(true), 500)
+    return () => clearTimeout(timeout)
   }, [])
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-50">
       <HeroSection
         title="About Us"
-        subtitle="Meet the talented team behind our success"
-        imageUrl="/about-us.jpeg"
+        subtitle="Meet the team behind the blog"
+        imagePath="/about-hero.jpg"
       />
 
-      <motion.section 
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 50 }}
-        transition={{ duration: 0.6 }}
-        className="py-16 px-4 sm:px-6 lg:px-8"
-      >
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900">
-                Our Story
-              </h2>
-              <div className="prose prose-lg">
-                <p className="text-gray-600">
-                  We started with a vision to create a platform that bridges the gap between technology and user experience. Our journey began with a small team of passionate individuals who believed in making web development more accessible and enjoyable.
-                </p>
-                <p className="text-gray-600">
-                  Today, we&apos;ve grown into a dynamic team of professionals, each bringing unique expertise and perspectives to our work. Our commitment to innovation and quality continues to drive us forward as we help businesses and developers create exceptional web experiences.
-                </p>
-              </div>
-            </div>
-            <motion.div 
-              className="relative rounded-xl overflow-hidden shadow-2xl"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-            >
-              <Image
-                src="/team-at-work.jpeg"
-                alt="Our team at work"
-                width={600}
-                height={400}
-                className="w-full h-auto"
-              />
-            </motion.div>
-          </div>
-        </div>
-      </motion.section>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
+              Our Team
+            </h2>
+            <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+              We&apos;re a passionate team dedicated to creating engaging content and building amazing web experiences.
+            </p>
+          </motion.div>
 
-      <section className="bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Meet Our Team
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
             {teamMembers.map((member, index) => (
-              <motion.div 
+              <motion.div
                 key={member.id}
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2 }}
-                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300"
-                onHoverStart={() => setActiveTeamMember(member.id)}
+                animate={{ 
+                  opacity: isVisible ? 1 : 0, 
+                  y: isVisible ? 0 : 20 
+                }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                className="bg-white rounded-lg shadow-lg overflow-hidden"
               >
-                <div className="relative h-72">
+                <div className="relative h-64">
                   <Image
                     src={member.image}
                     alt={member.name}
                     fill
-                    className="object-cover transition-transform duration-300 hover:scale-105"
+                    className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <h3 className="text-xl font-semibold text-white mb-1">{member.name}</h3>
-                    <p className="text-blue-300">{member.role}</p>
-                  </div>
                 </div>
                 <div className="p-6">
+                  <h3 className="text-xl font-semibold text-gray-900">
+                    {member.name}
+                  </h3>
+                  <p className="text-sm text-blue-600 mb-4">{member.role}</p>
                   <p className="text-gray-600 mb-4">{member.description}</p>
                   <div className="flex space-x-4">
-                    {Object.entries(member.socials).map(([platform, link]) => (
+                    {Object.entries(member.socials).map(([platform, url]) => (
                       <Link
                         key={platform}
-                        href={link}
-                        className="text-gray-400 hover:text-blue-600 transition-colors"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        href={url}
+                        className="text-gray-400 hover:text-gray-500"
                       >
-                        <span className="capitalize">{platform}</span>
+                        <span className="sr-only">{platform}</span>
+                        <i className={`fab fa-${platform} text-xl`}></i>
                       </Link>
                     ))}
                   </div>
@@ -157,21 +121,23 @@ export default function About() {
         </div>
       </section>
 
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-600 to-blue-800">
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-white mb-8">Want to Join Our Team?</h2>
-          <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
-            We&apos;re always looking for talented individuals who are passionate about web development and innovation. If you think you&apos;d be a great fit, we&apos;d love to hear from you.
-          </p>
-          <Link
-            href="/careers"
-            className="inline-block bg-white text-blue-600 px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors duration-300"
+      <section className="bg-white py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-center"
           >
-            View Open Positions
-          </Link>
+            <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl mb-8">
+              Our Mission
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              We strive to create engaging and informative content that helps our readers stay up-to-date with the latest trends in technology and web development. Our goal is to make complex topics accessible and enjoyable for everyone.
+            </p>
+          </motion.div>
         </div>
       </section>
     </div>
   )
 }
-
