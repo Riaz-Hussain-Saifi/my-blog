@@ -57,7 +57,7 @@ export default function About() {
       <HeroSection
         title="About Us"
         subtitle="Meet the team behind the blog"
-        imagePath="/about-hero.jpg"
+        imageUrl="/about-hero.jpg"
       />
 
       <section className="py-16 px-4 sm:px-6 lg:px-8">
